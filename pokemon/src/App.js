@@ -21,16 +21,29 @@ function App() {
     setPokemon(res.data.results.map(p => p.name))
   })
 
-  return () => cancel.cancel()
+  return () => cancel()
 
   }, [currentPageUrl])
+
+
+  function gotoNextPage() {
+    setCurrentPageUrl(nextPageUrl)
+  }
+
+  function gotoPrevPage() {
+    setCurrentPageUrl(prevPageUrl)
+  }
   
 if (loading) return 'loading...'
   return (
    
-    
+    <>
     <PokemonList pokemon={pokemon} />
-
+    <Pagination
+    gotoNextPage ={gotoNextPage ? gotoNextPage : null}
+    gotoPrevPage ={gotoPrevPage ? gotoPrevPage : null}
+    />
+</>
   );
 }
 
